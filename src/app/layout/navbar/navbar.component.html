@@ -1,0 +1,49 @@
+<div class="navbar-container">
+  <!-- Brand / Logo Section -->
+  <div class="brand-section">
+    <div class="logo-box">
+      <span class="logo-text">SPA</span>
+    </div>
+    <div class="brand-info">
+      <span class="title">CRM</span>
+      <span class="subtitle">Customer</span>
+    </div>
+  </div>
+
+  <!-- Search Input Section -->
+  <div class="search-section">
+    <p-iconfield iconPosition="left">
+      <p-inputicon class="pi pi-search"></p-inputicon>
+      <input type="text" pInputText placeholder="Search or type a command" class="search-input" />
+      <p-inputicon class="pi pi-microphone mic-icon"></p-inputicon>
+    </p-iconfield>
+  </div>
+
+  <!-- Right Actions Section -->
+  <div class="actions-section">
+    <!-- Language Selector -->
+    <div class="lang-selector">
+      <span class="flag-icon">🇬🇧</span>
+      <span class="lang-code">en</span>
+      <i class="pi pi-chevron-down text-xs"></i>
+    </div>
+
+    <!-- Notification Icons -->
+    <button class="icon-btn">
+      <i class="pi pi-bell"></i>
+    </button>
+    <button class="icon-btn">
+      <i class="pi pi-th-large"></i>
+    </button>
+
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <p-avatar 
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+        shape="circle" 
+        size="normal">
+      </p-avatar>
+      <span class="greeting">Hello {{ userName }}</span>
+    </div>
+  </div>
+</div>

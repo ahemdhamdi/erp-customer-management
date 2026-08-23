@@ -1,0 +1,244 @@
+<div class="crm-card">
+  <h1 class="card-title">Customers</h1>
+
+  <!-- Search & Filter Bar -->
+  <div class="filter-toolbar">
+    <div class="search-pill">
+      <i class="pi pi-search search-icon"></i>
+      <input
+        type="text"
+        pInputText
+        placeholder="Search...."
+        (input)="onSearchInput($event)"
+      />
+      <i class="pi pi-microphone mic-icon"></i>
+    </div>
+
+    <p-button
+      label="Filter"
+      icon="pi pi-filter"
+      iconPos="left"
+      variant="outlined"
+      severity="secondary"
+      styleClass="filter-pill-btn"
+      (click)="toggleFilter()"
+    ></p-button>
+
+    <p-multiSelect
+      [options]="allColumns"
+      [(ngModel)]="selectedColumns"
+      optionLabel="header"
+      placeholder="Filter Columns"
+      [style]="{ background: 'transparent' }"
+      panelStyleClass="custom-columns-dropdown"
+    >
+      <!-- تخصيص شكل العناصر المختارة لتظهر كـ Chips -->
+      <ng-template pTemplate="selectedItems" let-selectedOptions>
+        <div class="chips-container">
+          @for (col of selectedOptions; track col.field) {
+            <span class="chip-item">
+              {{ col.header }}
+              <i
+                class="pi pi-times close-btn"
+                (click)="removeColumn(col, $event)"
+              ></i>
+            </span>
+          }
+        </div>
+      </ng-template>
+    </p-multiSelect>
+  </div>
+  <!-- Filter Options -->
+
+  <!-- panel الفلتر المنسدل -->
+  @if (showFilterPanel()) {
+    <div class="filter-panel-card">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label>ID</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter ID"
+            [(ngModel)]="filterModel().Id"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Code</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Code"
+            [(ngModel)]="filterModel().Code"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Name</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Name"
+            [(ngModel)]="filterModel().Name"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Email</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Email"
+            [(ngModel)]="filterModel().Email"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Mobile</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Mobile"
+            [(ngModel)]="filterModel().Mobile"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Client Type</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Client Type"
+            [(ngModel)]="filterModel().ClientType"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Account Manager</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Account Manager"
+            [(ngModel)]="filterModel().AccountManager"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>City</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter City"
+            [(ngModel)]="filterModel().City"
+            (input)="onFilterChange()"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label>Country</label>
+          <input
+            type="text"
+            pInputText
+            placeholder="Filter Country"
+            [(ngModel)]="filterModel().Country"
+            (input)="onFilterChange()"
+          />
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="clear-btn" (click)="clearAllFilters()">
+          <i class="pi pi-trash"></i>
+          <span>Clear All Filters</span>
+        </button>
+      </div>
+    </div>
+  }
+  <!-- Action Buttons -->
+  <div class="buttons-bar">
+    <p-button label="+ Add Customer" (onClick)="openAddCustomerDialog()" styleClass="btn-primary-add"></p-button>
+    <p-button
+      label="Export Excel"
+      icon="pi pi-file-excel"
+      severity="secondary"
+      (onClick)="exportCSV($event)"
+    />
+  </div>
+
+  <app-customer-table
+    [customers]="displayedCustomers()"
+    [loading]="loading()"
+    [allColumns]="allColumns"
+    [selectedColumns]="selectedColumns"
+    [totalRecords]="totalRecords()"
+    [rows]="rows()"
+    [first]="first()"
+    (lazyLoad)="loadCustomersLazy($event)"
+    (rowsChange)="onRowsChange($event)"
+    (refresh)="refreshData()"
+    (actionClick)="onAction($event.action, $event.customer)"
+  ></app-customer-table>
+  
+</div>
+
+<!-- ================= 2. ACTIONS CARD ================= -->
+<div class="actions-section-card">
+  <!-- Header -->
+  <div class="section-header">
+    <h3 class="section-title">Actions</h3>
+    <p class="section-subtitle">Manage customers related actions and operations.</p>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="actions-cards-container">
+    
+    <!-- Card 1: Collective Reassign -->
+    <div class="action-card" (click)="onSectionAction('collectiveReassign')">
+      <div class="card-icon-wrapper">
+        <i class="pi pi-arrows-v"></i>
+      </div>
+      <div class="card-content">
+        <h4 class="card-title">Collective Reassign</h4>
+        <p class="card-desc">Use a template to reassign customers in bulk.</p>
+      </div>
+    </div>
+
+    <!-- Card 2: Customer Follow Up -->
+    <div class="action-card" (click)="onSectionAction('customerFollowUp')">
+      <div class="card-icon-wrapper">
+        <i class="pi pi-sparkles"></i>
+      </div>
+      <div class="card-content">
+        <h4 class="card-title">Customer Follow Up</h4>
+        <p class="card-desc">Use a template to follow up customers.</p>
+      </div>
+    </div>
+
+    <!-- Card 3: Upload Bulk -->
+    <div class="action-card" (click)="onSectionAction('uploadBulk')">
+      <div class="card-icon-wrapper">
+        <i class="pi pi-upload"></i>
+      </div>
+      <div class="card-content">
+        <h4 class="card-title">Upload Bulk</h4>
+        <p class="card-desc">Use a template to upload bulk customer data.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ================= 3. REPORTS CARD ================= -->
+<div class="crm-card">
+  <div class="card-header-text">
+    <h2>Reports</h2>
+    <p>Manage customers related reports.</p>
+  </div>
+</div>

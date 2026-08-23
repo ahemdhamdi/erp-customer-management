@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-family: 'Plus Jakarta Sans', sans-serif !important;
+  --p-font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+
+html, body, *, *::before, *::after, .p-component, input, button, select, textarea {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.pi, 
+.pi::before, 
+.pi::after,
+[class^="pi-"], 
+[class*=" pi-"] {
+  font-family: 'primeicons' !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}

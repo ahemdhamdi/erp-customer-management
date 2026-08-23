@@ -1,0 +1,141 @@
+
+:host ::ng-deep {
+  .crm-table-custom {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    // overflow: hidden;
+
+    .p-datatable-thead>tr>th {
+      background-color: #edf4ff;
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #e2e8f0;
+
+      &.actions-col {
+        background-color: #dbeafe;
+        text-align: center;
+      }
+    }
+
+    .p-datatable-tbody>tr>td {
+      font-size: 0.8rem;
+      color: #1e293b;
+      padding: 0.75rem;
+      border-bottom: 1px solid #f1f5f9;
+
+      &.actions-col {
+        text-align: center;
+      }
+    }
+
+    .action-blue-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: #3b82f6;
+      color: #ffffff;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .p-paginator {
+      background-color: #edf4ff;
+      border-top: 1px solid #e2e8f0;
+      padding: 0.5rem 1rem;
+
+      .paginator-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: #475569;
+
+        .rows-dropdown {
+          height: 32px;
+
+          .p-select-label {
+            padding: 0.25rem 0.5rem;
+          }
+        }
+      }
+
+      .p-paginator-pages .p-paginator-page {
+        border-radius: 6px;
+        min-width: 2rem;
+        height: 2rem;
+        font-size: 0.8rem;
+
+        &.p-highlight {
+          background-color: #2563eb;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+
+
+// =============================================================
+// =============================================================
+// =============================================================
+// زر الأكشن الأساسي في الجدول
+.action-trigger-btn {
+  background-color: #3b82f6 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  width: 2.2rem !important;
+  height: 2.2rem !important;
+  color: #ffffff !important;
+}
+
+// تنسيق اللوحة المنسدلة (OverlayPanel)
+::ng-deep .actions-overlay-panel {
+  .p-overlaypanel-content {
+    padding: 0.75rem 1rem !important;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 160px); // 3 أعمدة بعرض مناسب
+  gap: 0.5rem 1rem;
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1e293b;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #f1f5f9;
+    }
+
+    i {
+      font-size: 1rem;
+    }
+
+    // ألوان الأيقونات المطابقة للصورة
+    .icon-amber   { color: #f59e0b; }
+    .icon-emerald { color: #10b981; }
+    .icon-rose    { color: #f43f5e; }
+    .icon-blue    { color: #3b82f6; }
+    .icon-purple  { color: #a855f7; }
+    .icon-teal    { color: #14b8a6; }
+    .icon-lime    { color: #84cc16; }
+    .icon-pink    { color: #ec4899; }
+    .icon-indigo  { color: #6366f1; }
+  }
+}

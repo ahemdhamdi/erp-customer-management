@@ -1,0 +1,98 @@
+<div class="dashboard-wrapper">
+  <h2 class="page-title">Customer Overview</h2>
+
+  <!-- Top KPI Stats -->
+  <div class="kpi-grid">
+    @for (stat of kpiStats; track stat.title) {
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">{{ stat.title }}</span>
+          <i [class]="stat.icon" [style.color]="stat.color"></i>
+        </div>
+        <div class="kpi-value">{{ stat.value }}</div>
+      </div>
+    }
+  </div>
+
+  <!-- Main Grid Section -->
+  <div class="content-grid">
+    <!-- Customer List Table -->
+    <div class="section-card table-section">
+      <div class="section-header">
+        <h3>Customer List</h3>
+        <div class="table-actions">
+          <p-button icon="pi pi-filter" label="Filter" severity="secondary" size="small" [outlined]="true"></p-button>
+        </div>
+      </div>
+
+      <p-table [value]="customers" [tableStyle]="{ 'min-width': '100%' }" class="custom-table">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>City</th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr>
+            <td><p-tableCheckbox [value]="customer"></p-tableCheckbox></td>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.code }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.mobile }}</td>
+            <td>{{ customer.city }}</td>
+            <td>
+              <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"></p-tag>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- Right Side Widgets -->
+    <div class="side-widgets">
+      <!-- Activity Feed -->
+      <div class="section-card">
+        <h3>Recent Activity Feed</h3>
+        <ul class="activity-list">
+          <li>
+            <i class="pi pi-user-plus icon-activity"></i>
+            <div>
+              <p class="act-title">Recent client related</p>
+              <span class="act-time">2 hours ago</span>
+            </div>
+          </li>
+          <li>
+            <i class="pi pi-check-circle icon-activity"></i>
+            <div>
+              <p class="act-title">Client completed</p>
+              <span class="act-time">4 hours ago</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Lead Source Pie Chart -->
+      <div class="section-card">
+        <h3>Lead Source Breakdown</h3>
+        <div class="chart-container">
+          <p-chart type="pie" [data]="pieData" [options]="chartOptions"></p-chart>
+        </div>
+      </div>
+
+      <!-- Quotation Funnel Bar Chart -->
+      <div class="section-card">
+        <h3>Quotation Funnel</h3>
+        <div class="chart-container">
+          <p-chart type="bar" [data]="barData" [options]="chartOptions"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

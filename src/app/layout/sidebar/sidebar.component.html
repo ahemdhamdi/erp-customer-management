@@ -1,0 +1,23 @@
+<div class="sidebar-container">
+  <ul class="menu-list">
+    @for (item of menuItems; track item.label) {
+      <li class="menu-item">
+        <a 
+          [routerLink]="item.routerLink" 
+          routerLinkActive="active" 
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="menu-link"
+        >
+          <div class="item-content">
+            <i [class]="item.icon + ' item-icon'"></i>
+            <span class="item-label">{{ item.label }}</span>
+          </div>
+
+          @if (item.badge) {
+            <i class="pi pi-star-fill star-icon"></i>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</div>

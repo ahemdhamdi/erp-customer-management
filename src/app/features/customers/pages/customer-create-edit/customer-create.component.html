@@ -1,0 +1,496 @@
+<form
+  [formGroup]="customerForm"
+  (ngSubmit)="submit()"
+  class="customer-form"
+>
+  <div class="form-grid">
+
+    <!-- Code -->
+    <div class="field">
+      <label for="customerCode">Code</label>
+
+      <input
+        id="customerCode"
+        pInputText
+        formControlName="Code"
+        readonly
+        placeholder="Generated automatically"
+      />
+    </div>
+
+    <!-- Name AR -->
+    <div class="field">
+      <label for="nameAR">
+        Name AR <span class="required">*</span>
+      </label>
+
+      <input
+        id="nameAR"
+        pInputText
+        formControlName="NameAR"
+      />
+
+      @if (
+        customerForm.controls.NameAR.invalid &&
+        customerForm.controls.NameAR.touched
+      ) {
+        <small class="error">
+          Name AR is required
+        </small>
+      }
+    </div>
+
+    <!-- Name EN -->
+    <div class="field">
+      <label for="nameEN">Name EN</label>
+
+      <input
+        id="nameEN"
+        pInputText
+        formControlName="NameEN"
+      />
+    </div>
+
+
+    <!-- Name -->
+    <div class="field">
+      <label for="customerName">Name</label>
+
+      <input
+        id="customerName"
+        pInputText
+        formControlName="Name"
+      />
+    </div>
+
+    <!-- Commercial Name -->
+    <div class="field">
+      <label for="commercialName">
+        Commercial Name <span class="required">*</span>
+      </label>
+
+      <input
+        id="commercialName"
+        pInputText
+        formControlName="CommercialName"
+      />
+
+      @if (
+        customerForm.controls.CommercialName.invalid &&
+        customerForm.controls.CommercialName.touched
+      ) {
+        <small class="error">
+          Commercial Name is required
+        </small>
+      }
+    </div>
+
+    <!-- Mobile -->
+    <div class="field">
+      <label for="mobile">Mobile</label>
+
+      <input
+        id="mobile"
+        pInputText
+        formControlName="Mobile"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div class="field">
+      <label for="phone">Phone</label>
+
+      <input
+        id="phone"
+        pInputText
+        formControlName="Phone"
+      />
+    </div>
+
+
+    <!-- Fax -->
+    <div class="field">
+      <label for="fax">Fax</label>
+
+      <input
+        id="fax"
+        pInputText
+        formControlName="Fax"
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">Email</label>
+
+      <input
+        id="email"
+        pInputText
+        type="email"
+        formControlName="Email"
+      />
+
+      @if (
+        customerForm.controls.Email.invalid &&
+        customerForm.controls.Email.touched
+      ) {
+        <small class="error">
+          Please enter a valid email
+        </small>
+      }
+    </div>
+
+    <!-- Website -->
+    <div class="field">
+      <label for="website">Website</label>
+
+      <input
+        id="website"
+        pInputText
+        formControlName="Website"
+      />
+    </div>
+
+    <!-- Country -->
+    <div class="field">
+      <label>Country</label>
+
+      <p-select
+        inputId="country"
+        formControlName="CountryId"
+        [options]="countries"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Country"
+        [showClear]="true"
+        ariaLabel="Country"
+        fluid
+      />
+    </div>
+
+
+    <!-- City -->
+    <div class="field">
+      <label>City</label>
+
+      <p-select
+        inputId="city"
+        formControlName="CityId"
+        [options]="cities"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select City"
+        [showClear]="true"
+        ariaLabel="City"
+        fluid
+      />
+    </div>
+
+    <!-- Region -->
+    <div class="field">
+      <label>Region</label>
+
+      <p-select
+        inputId="region"
+        formControlName="RegionId"
+        [options]="regions"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Region"
+        [showClear]="true"
+        ariaLabel="Region"
+        fluid
+      />
+    </div>
+
+    <!-- Request Source -->
+    <div class="field">
+      <label for="requestSource">Request Source</label>
+
+      <input
+        id="requestSource"
+        pInputText
+        formControlName="RequestSource"
+      />
+    </div>
+
+
+    <!-- Address -->
+    <div class="field">
+      <label for="address">Address</label>
+
+      <input
+        id="address"
+        pInputText
+        formControlName="Address"
+      />
+    </div>
+
+    <!-- Employment -->
+    <div class="field">
+      <label for="employment">Employment</label>
+
+      <input
+        id="employment"
+        pInputText
+        formControlName="Employment"
+      />
+    </div>
+
+    <!-- Type -->
+    <div class="field">
+      <label>Type</label>
+
+      <p-select
+        inputId="customerType"
+        formControlName="Type"
+        [options]="customerTypes"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Type"
+        ariaLabel="Type"
+        fluid
+      />
+    </div>
+
+
+    <!-- Client Type -->
+    <div class="field">
+      <label>Client Type <span class="required">*</span></label>
+
+      <p-select
+        inputId="clientType"
+        formControlName="ClientType"
+        [options]="clientTypes"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Client Type"
+        ariaLabel="Client Type"
+        fluid
+      />
+    </div>
+
+    <!-- Classification -->
+    <div class="field">
+      <label>Classification</label>
+
+      <p-select
+        inputId="classification"
+        formControlName="ClassificationId"
+        [options]="classifications"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Classification"
+        [showClear]="true"
+        ariaLabel="Classification"
+        fluid
+      />
+    </div>
+
+    <!-- Account Manager -->
+    <div class="field">
+      <label>Account Manager</label>
+
+      <p-select
+        inputId="accountManager"
+        formControlName="AccountManagerId"
+        [options]="accountManagers"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Account Manager"
+        [showClear]="true"
+        ariaLabel="Account Manager"
+        fluid
+      />
+    </div>
+
+
+    <!-- Business Field -->
+    <div class="field">
+      <label>Business Field</label>
+
+      <p-select
+        inputId="businessField"
+        formControlName="BusinessFieldId"
+        [options]="businessFields"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Business Field"
+        [showClear]="true"
+        ariaLabel="Business Field"
+        fluid
+      />
+    </div>
+
+    <!-- Account Type -->
+    <div class="field">
+      <label>Account Type</label>
+
+      <p-select
+        inputId="accountType"
+        formControlName="AccountTypeId"
+        [options]="accountTypes"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Account Type"
+        [showClear]="true"
+        ariaLabel="Account Type"
+        fluid
+      />
+    </div>
+
+    <!-- Payment Profile -->
+    <div class="field">
+      <label>Payment Profile</label>
+
+      <p-select
+        inputId="paymentProfile"
+        formControlName="PaymentProfileId"
+        [options]="paymentProfiles"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Payment Profile"
+        [showClear]="true"
+        ariaLabel="Payment Profile"
+        fluid
+      />
+    </div>
+
+
+    <!-- Latitude -->
+    <div class="field">
+      <label for="latitude">Latitude</label>
+
+      <input
+        id="latitude"
+        pInputText
+        type="number"
+        formControlName="Latitude"
+      />
+    </div>
+
+    <!-- Longitude -->
+    <div class="field">
+      <label for="longitude">Longitude</label>
+
+      <input
+        id="longitude"
+        pInputText
+        type="number"
+        formControlName="Longitude"
+      />
+    </div>
+
+    <!-- Job Title -->
+    <div class="field">
+      <label for="jobTitle">Job Title</label>
+
+      <input
+        id="jobTitle"
+        pInputText
+        formControlName="JobTitle"
+      />
+    </div>
+
+    <!-- Invited Employees -->
+    <div class="field">
+      <label for="invitedEmployees">
+        Invited Employees
+      </label>
+
+      <input
+        id="invitedEmployees"
+        pInputText
+        formControlName="InvitedEmployeesIds"
+      />
+    </div>
+
+
+    <!-- Project -->
+    <div class="field">
+      <label>Project</label>
+
+      <p-select
+        inputId="project"
+        formControlName="ProjectId"
+        [options]="projects"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Project"
+        [showClear]="true"
+        ariaLabel="Project"
+        fluid
+      />
+    </div>
+
+    <!-- Unit -->
+    <div class="field">
+      <label>Unit</label>
+
+      <p-select
+        inputId="unit"
+        formControlName="UnitId"
+        [options]="units"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select Unit"
+        [showClear]="true"
+        ariaLabel="Unit"
+        fluid
+      />
+    </div>
+
+    <!-- Religion -->
+    <div class="field">
+      <label>Religion</label>
+
+      <p-select
+        inputId="religion"
+        formControlName="Religion"
+        [options]="religions"
+        optionLabel="name"
+        optionValue="value"
+        placeholder="Select Religion"
+        [showClear]="true"
+        ariaLabel="Religion"
+        fluid
+      />
+    </div>
+
+    <!-- Message -->
+    <div class="field">
+      <label for="message">Message</label>
+
+      <input
+        id="message"
+        pInputText
+        formControlName="Message"
+      />
+    </div>
+
+  </div>
+
+
+  <!-- Actions -->
+
+  <div class="form-actions">
+
+    <button
+      pButton
+      type="button"
+      label="Cancel"
+      severity="secondary"
+      (click)="closeDialog()"
+    ></button>
+
+    <button
+      pButton
+      type="submit"
+      label="Save"
+      [loading]="saving()"
+      [disabled]="saving()"
+    ></button>
+
+  </div>
+
+</form>

@@ -1,0 +1,143 @@
+<p-table
+  #dt
+  [value]="loading ? [1, 2, 3, 4, 5] : customers"
+  [columns]="allColumns"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [lazy]="true"
+  (onLazyLoad)="lazyLoad.emit($event)"
+  dataKey="Id"
+  [rowTrackBy]="trackByCustomerId"
+  [paginator]="true"
+  [showFirstLastIcon]="true"
+  styleClass="crm-table-custom"
+>
+  <!-- Header -->
+  <ng-template pTemplate="header">
+    <tr>
+      @for (col of selectedColumns; track col.field) {
+        <th>{{ col.header }}</th>
+      }
+      <th class="actions-col text-center">Actions</th>
+    </tr>
+  </ng-template>
+
+  <!-- Body -->
+  <ng-template pTemplate="body" let-customer>
+    @if (loading) {
+      <tr>
+        @for (col of selectedColumns; track col.field) {
+          <td><p-skeleton width="70%"></p-skeleton></td>
+        }
+        <td class="actions-col text-center">
+          <p-skeleton width="2rem" height="2rem"></p-skeleton>
+        </td>
+      </tr>
+    } @else {
+      <tr>
+        @for (col of selectedColumns; track col.field) {
+          <td>{{ customer[col.field] || "-" }}</td>
+        }
+
+        <!-- Dropdown Actions -->
+        <td class="text-center">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-cog"
+            class="action-trigger-btn"
+            (click)="op.toggle($event)"
+          ></button>
+
+          <p-overlayPanel
+            #op
+            styleClass="actions-overlay-panel"
+            [showCloseIcon]="false"
+          >
+            <div class="actions-grid">
+              <button class="action-item" (click)="actionClick.emit({action: 'view', customer: customer}); op.hide()">
+                <i class="pi pi-eye icon-amber"></i>
+                <span>View</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'edit', customer: customer}); op.hide()">
+                <i class="pi pi-file-edit icon-emerald"></i>
+                <span>Edit</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'delete', customer: customer}); op.hide()">
+                <i class="pi pi-trash icon-rose"></i>
+                <span>Delete</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'changeStatus', customer: customer}); op.hide()">
+                <i class="pi pi-history icon-blue"></i>
+                <span>Change Status</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'location', customer: customer}); op.hide()">
+                <i class="pi pi-map-marker icon-emerald"></i>
+                <span>Location</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'attachment', customer: customer}); op.hide()">
+                <i class="pi pi-paperclip icon-purple"></i>
+                <span>Attachment</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'salesOrder', customer: customer}); op.hide()">
+                <i class="pi pi-shopping-cart icon-teal"></i>
+                <span>Sales Order</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'followUp', customer: customer}); op.hide()">
+                <i class="pi pi-sparkles icon-amber"></i>
+                <span>Follow-Up</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'log', customer: customer}); op.hide()">
+                <i class="pi pi-clock icon-lime"></i>
+                <span>Log</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'nfc', customer: customer}); op.hide()">
+                <i class="pi pi-wallet icon-pink"></i>
+                <span>NFC</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'addPotential', customer: customer}); op.hide()">
+                <i class="pi pi-user-plus icon-indigo"></i>
+                <span>Add Potential</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'potential', customer: customer}); op.hide()">
+                <i class="pi pi-users icon-teal"></i>
+                <span>Potential</span>
+              </button>
+              <button class="action-item" (click)="actionClick.emit({action: 'contacts', customer: customer}); op.hide()">
+                <i class="pi pi-phone icon-indigo"></i>
+                <span>Contacts</span>
+              </button>
+            </div>
+          </p-overlayPanel>
+        </td>
+      </tr>
+    }
+  </ng-template>
+
+  <!-- Paginator -->
+  <ng-template pTemplate="paginatorleft">
+    <div class="paginator-info">
+      <span>
+        Showing {{ first + 1 }} to
+        {{ Math.min(first + rows, totalRecords) }} of
+        {{ totalRecords }} Results
+      </span>
+      <p-select
+        [options]="[5, 10, 20]"
+        [ngModel]="rows"
+        (onChange)="rowsChange.emit($event.value)"
+        styleClass="rows-dropdown"
+      ></p-select>
+      <span>items per page</span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorright">
+    <button
+      pButton
+      icon="pi pi-refresh"
+      class="p-button-text p-button-rounded refresh-btn"
+      (click)="refresh.emit()"
+    ></button>
+  </ng-template>
+</p-table>
