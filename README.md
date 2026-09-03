@@ -3,7 +3,22 @@
 A high-performance Customer Management interface built with Angular 19 for an ERP platform.
 
 The application provides customer listing, searching, filtering, pagination, column management, customer creation, and customer editing using a modern Angular architecture.
+---
+Performance / API Constraint
 
+The provided ReadAllCRMClients endpoint does not expose
+server-side pagination parameters such as pageIndex/pageSize,
+skip/take, offset/limit, or cursor.
+
+Therefore, true server-side pagination cannot be implemented
+solely from the provided API contract.
+
+The implementation currently uses client-side pagination as
+a fallback while keeping the table architecture compatible
+with server-side pagination once the API supports it.
+
+For production usage with 100,000+ records, the backend should
+support pagination, sorting, filtering, and total count retrieval.
 ---
 
 ## Features
